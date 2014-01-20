@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/expect --
+# !/bin/bash
+
+
 # sudo -s
 # instal latest nginx with apt-get
 # sudo apt-get update
@@ -35,3 +38,83 @@ cd ~
 echo deb http://dl.hhvm.com/ubuntu precise main | sudo tee /etc/apt/sources.list.d/hhvm.list
 sudo apt-get update
 sudo apt-get install hhvm-fastcgi -y
+hhvm --mode daemon -vServer.Type=fastcgi -vServer.Port=9000
+
+# MySQL
+cd ~
+sudo apt-get install expect -y
+# wget -O mysql-5.6.deb http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.15-debian6.0-i686.deb
+wget -O mysql-5.6.deb http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.15-debian6.0-x86_64.deb
+sudo dpkg -i mysql-5.6.deb
+
+sudo apt-get install libaio1 -y
+
+sudo /opt/mysql/server-5.6/scripts/mysql_install_db
+
+spawn /opt/mysql/server-5.6/bin/mysql_secure_installation
+
+expect "Enter current password for root (enter for none):"
+send "\r"
+	
+expect "Set root password?"
+send "y\r"
+
+expect "New password:"
+send "password\r"
+
+expect "Re-enter new password:"
+send "password\r"
+
+expect "Remove anonymous users?"
+send "y\r"
+
+expect "Disallow root login remotely?"
+send "y\r"
+
+expect "Remove test database and access to it?"
+send "y\r"
+
+expect "Reload privilege tables now?"
+send "y\r"
+
+puts "Ended expect script."
+
+
+# To start mysqld at boot time you have to copy
+# support-files/mysql.server to the right place for your system
+
+# PLEASE REMEMBER TO SET A PASSWORD FOR THE MySQL root USER !
+# To do so, start the server, then issue the following commands:
+
+#   /opt/mysql/server-5.6/bin/mysqladmin -u root password 'new-password'
+#   /opt/mysql/server-5.6/bin/mysqladmin -u root -h precise32 password 'new-password'
+
+# Alternatively you can run:
+
+#   /opt/mysql/server-5.6/bin/mysql_secure_installation
+
+# which will also give you the option of removing the test
+# databases and anonymous user created by default.  This is
+# strongly recommended for production servers.
+
+# See the manual for more instructions.
+
+# You can start the MySQL daemon with:
+
+#   cd /opt/mysql/server-5.6 ; /opt/mysql/server-5.6/bin/mysqld_safe &
+
+# You can test the MySQL daemon with mysql-test-run.pl
+
+#   cd mysql-test ; perl mysql-test-run.pl
+
+# Please report any problems with the /opt/mysql/server-5.6/bin/mysqlbug script!
+
+# The latest information about MySQL is available on the web at
+
+#   http://www.mysql.com
+
+# Support MySQL by buying support/licenses at http://shop.mysql.com
+
+# New default config file was created as /opt/mysql/server-5.6/my.cnf and
+# will be used by default by the server when you start it.
+# You may edit this file to change server settings
