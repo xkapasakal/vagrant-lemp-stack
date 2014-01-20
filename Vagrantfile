@@ -58,6 +58,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # View the documentation for the provider you're using for more
   # information on available options.
 
+  config.vm.provider :digital_ocean do |provider, override|
+    override.ssh.private_key_path = '~/.ssh/id_do_rsa'
+    override.vm.box = 'digital_ocean'
+    override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
+
+    provider.image = 'Ubuntu 12.04.3 x64'
+    provider.client_id = 'a78fcb34606a2983c7b2b8a94866bbfa'
+    provider.api_key = '3e4fbe52d26726153d4d8a78437af19b'
+  end
+
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
@@ -94,31 +104,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Network
   # config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.provision "shell", path: "scripts/nginx.sh"
+  config.vm.provision "shell", path: "scripts/provision.sh"
 
-  # config.vm.provision :chef_solo do |chef|
-  #   chef.cookbooks_path = "vendor/cookbooks"
-  #   # chef.roles_path = "../my-recipes/roles"
-  #   # chef.data_bags_path = "../my-recipes/data_bags"
-  #   chef.run_list = [
-  #     "recipe[apt]",
-  #     "recipe[mysql]",
-  #     "recipe[mysql::server]",
-  #     "recipe[nginx]"
-  #   ]
-  # # chef.add_recipe "apt"
-  # # chef.add_recipe "mysql"
-  # #   chef.add_role "web"
-  # #
-  # # You may also specify custom JSON attributes:
-  #   chef.json = {
-  #     :mysql => {
-  #       :server_root_password => 'rootpass',
-  #       :server_debian_password => 'debpass',
-  #       :server_repl_password => 'replpass'
-  #     }
-  #   }
-  # end
+  config.vm.provision :chef_solo do |chef|
+    chef.cookbooks_path = "vendor/cookbooks"
+    # chef.roles_path = "../my-recipes/roles"
+    # chef.data_bags_path = "../my-recipes/data_bags"
+    chef.run_list = [
+      "recipe[apt]",
+      "recipe[mysql]",
+      "recipe[mysql::server]"
+    ]
+  # chef.add_recipe "apt"
+  # chef.add_recipe "mysql"
+  #   chef.add_role "web"
+  #
+  # You may also specify custom JSON attributes:
+    chef.json = {
+      :mysql => {
+        :server_root_password => 'rootpass',
+        :server_debian_password => 'debpass',
+        :server_repl_password => 'replpass'
+      }
+    }
+  end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
