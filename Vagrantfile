@@ -64,8 +64,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
 
     provider.image = 'Ubuntu 12.04.3 x64'
-    provider.client_id = 'a78fcb34606a2983c7b2b8a94866bbfa'
-    provider.api_key = '3e4fbe52d26726153d4d8a78437af19b'
+    provider.client_id = ''
+    provider.api_key = ''
   end
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
@@ -104,7 +104,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Network
   # config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.provision "shell", path: "scripts/provision.sh"
+  # config.vm.provision "shell", path: "scripts/provision.sh"
 
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "vendor/cookbooks"
@@ -112,20 +112,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # chef.data_bags_path = "../my-recipes/data_bags"
     chef.run_list = [
       "recipe[apt]",
-      "recipe[mysql]",
-      "recipe[mysql::server]"
+      "recipe[nginx::source]"
+      # "recipe[mysql]",
+      # "recipe[mysql::server]"
     ]
   # chef.add_recipe "apt"
   # chef.add_recipe "mysql"
-  #   chef.add_role "web"
+  # chef.add_role "web"
   #
   # You may also specify custom JSON attributes:
     chef.json = {
-      :mysql => {
-        :server_root_password => 'rootpass',
-        :server_debian_password => 'debpass',
-        :server_repl_password => 'replpass'
+      :nginx => {
+        :version => "1.4.4",
+        :default_site_enabled => true,
+        :source => {
+          :url => "http://nginx.org/download/nginx-1.4.4.tar.gz",
+          :checksum => '7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9'
+          # :modules => ["ngx_pagespeed_module", "http_gzip_static_module", "http_ssl_module"]
+        }
       }
+      # :mysql => {
+      #   :server_root_password => 'rootpass',
+      #   :server_debian_password => 'debpass',
+      #   :server_repl_password => 'replpass'
+      # }
     }
   end
 
