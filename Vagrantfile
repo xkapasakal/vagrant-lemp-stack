@@ -94,29 +94,31 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Network
   # config.vm.network :forwarded_port, guest: 80, host: 8080
 
-  config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "vendor/cookbooks"
-    # chef.roles_path = "../my-recipes/roles"
-    # chef.data_bags_path = "../my-recipes/data_bags"
-    chef.run_list = [
-      "recipe[apt]",
-      "recipe[mysql]",
-      "recipe[mysql::server]",
-      "recipe[nginx]"
-    ]
-  # chef.add_recipe "apt"
-  # chef.add_recipe "mysql"
-  #   chef.add_role "web"
-  #
-  # You may also specify custom JSON attributes:
-    chef.json = {
-      :mysql => {
-        :server_root_password => 'rootpass',
-        :server_debian_password => 'debpass',
-        :server_repl_password => 'replpass'
-      }
-    }
-  end
+  config.vm.provision "shell", path: "scripts/nginx.sh"
+
+  # config.vm.provision :chef_solo do |chef|
+  #   chef.cookbooks_path = "vendor/cookbooks"
+  #   # chef.roles_path = "../my-recipes/roles"
+  #   # chef.data_bags_path = "../my-recipes/data_bags"
+  #   chef.run_list = [
+  #     "recipe[apt]",
+  #     "recipe[mysql]",
+  #     "recipe[mysql::server]",
+  #     "recipe[nginx]"
+  #   ]
+  # # chef.add_recipe "apt"
+  # # chef.add_recipe "mysql"
+  # #   chef.add_role "web"
+  # #
+  # # You may also specify custom JSON attributes:
+  #   chef.json = {
+  #     :mysql => {
+  #       :server_root_password => 'rootpass',
+  #       :server_debian_password => 'debpass',
+  #       :server_repl_password => 'replpass'
+  #     }
+  #   }
+  # end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
