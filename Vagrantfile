@@ -128,8 +128,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         :init_style => 'init',
         :source => {
           :url => "http://nginx.org/download/nginx-1.4.4.tar.gz",
-          :checksum => '7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9'
-          # :modules => ["ngx_pagespeed_module", "http_gzip_static_module", "http_ssl_module"]
+          :checksum => '7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9',
+          :modules => ["nginx::ngx_pagespeed_module", "nginx::http_gzip_static_module", "nginx::http_ssl_module"]
         }
       }
       # :mysql => {
