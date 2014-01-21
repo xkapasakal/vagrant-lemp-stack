@@ -125,6 +125,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       :nginx => {
         :version => "1.4.4",
         :default_site_enabled => true,
+        :init_style => 'init',
         :source => {
           :url => "http://nginx.org/download/nginx-1.4.4.tar.gz",
           :checksum => '7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9'
