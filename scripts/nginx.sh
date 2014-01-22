@@ -41,6 +41,8 @@ sudo mkdir -p /var/www
 sudo mkdir -p /etc/nginx/sites-available
 sudo mkdir -p /etc/nginx/sites-enabled
 sudo cp /vagrant/scripts/wordpress/wordpress /etc/nginx/sites-available/
+ip=$(ip addr | grep inet | grep global | awk -F" " '{print $2}'| sed -e 's/\/.*$//')
+sed -i 's/server_name localhost;/server_name $ip;/g' /etc/nginx/sites-available/wordpress
 sudo ln -s /etc/nginx/sites-available/wordpress /etc/nginx/sites-enabled/wordpress
 
 sudo service nginx start
