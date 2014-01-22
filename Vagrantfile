@@ -22,7 +22,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 80, host: 1234
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
@@ -47,13 +47,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  # config.vm.provider :virtualbox do |vb|
-  #   # Don't boot with headless mode
-  #   vb.gui = true
-  #
-  #   # Use VBoxManage to customize the VM. For example to change memory:
-  #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  # end
+  config.vm.provider :virtualbox do |vb|
+    vb.memory = 512
+    # Don't boot with headless mode
+    # vb.gui = true
+  
+    # Use VBoxManage to customize the VM. For example to change memory:
+    # vb.customize ["modifyvm", :id, "--memory", "1024"]
+  end
   #
   # View the documentation for the provider you're using for more
   # information on available options.
@@ -106,39 +107,39 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   # config.vm.provision "shell", path: "scripts/provision.sh"
 
-  config.vm.provision :chef_solo do |chef|
-    chef.cookbooks_path = "vendor/cookbooks"
-    # chef.roles_path = "../my-recipes/roles"
-    # chef.data_bags_path = "../my-recipes/data_bags"
-    chef.run_list = [
-      "recipe[apt]",
-      "recipe[nginx::source]"
-      # "recipe[mysql]",
-      # "recipe[mysql::server]"
-    ]
-  # chef.add_recipe "apt"
-  # chef.add_recipe "mysql"
-  # chef.add_role "web"
-  #
-  # You may also specify custom JSON attributes:
-    chef.json = {
-      :nginx => {
-        :version => "1.4.4",
-        :default_site_enabled => true,
-        :init_style => 'init',
-        :source => {
-          :url => "http://nginx.org/download/nginx-1.4.4.tar.gz",
-          :checksum => '7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9',
-          :modules => ["nginx::ngx_pagespeed_module", "nginx::http_gzip_static_module", "nginx::http_ssl_module"]
-        }
-      }
-      # :mysql => {
-      #   :server_root_password => 'rootpass',
-      #   :server_debian_password => 'debpass',
-      #   :server_repl_password => 'replpass'
-      # }
-    }
-  end
+  # config.vm.provision :chef_solo do |chef|
+  #   chef.cookbooks_path = "vendor/cookbooks"
+  #   # chef.roles_path = "../my-recipes/roles"
+  #   # chef.data_bags_path = "../my-recipes/data_bags"
+  #   chef.run_list = [
+  #     "recipe[apt]",
+  #     "recipe[nginx::source]"
+  #     # "recipe[mysql]",
+  #     # "recipe[mysql::server]"
+  #   ]
+  # # chef.add_recipe "apt"
+  # # chef.add_recipe "mysql"
+  # # chef.add_role "web"
+  # #
+  # # You may also specify custom JSON attributes:
+  #   chef.json = {
+  #     :nginx => {
+  #       :version => "1.4.4",
+  #       :default_site_enabled => true,
+  #       :init_style => 'init',
+  #       :source => {
+  #         :url => "http://nginx.org/download/nginx-1.4.4.tar.gz",
+  #         :checksum => '7c989a58e5408c9593da0bebcd0e4ffc3d892d1316ba5042ddb0be5b0b4102b9',
+  #         :modules => ["nginx::ngx_pagespeed_module", "nginx::http_gzip_static_module", "nginx::http_ssl_module"]
+  #       }
+  #     }
+  #     # :mysql => {
+  #     #   :server_root_password => 'rootpass',
+  #     #   :server_debian_password => 'debpass',
+  #     #   :server_repl_password => 'replpass'
+  #     # }
+  #   }
+  # end
 
   # Enable provisioning with chef server, specifying the chef server URL,
   # and the path to the validation key (relative to this Vagrantfile).
