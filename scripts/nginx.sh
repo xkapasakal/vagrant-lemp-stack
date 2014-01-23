@@ -34,8 +34,9 @@ sudo cp /vagrant/scripts/conf/nginx.conf /usr/local/nginx/conf/
 sudo cp /vagrant/scripts/etc/init/nginx.conf /etc/init/
 
 # pagespeed configuration
-sudo mkdir -p /var/ngx_pagespeed_cache
-sudo mkdir -p /var/log/pagespeed
+# https://github.com/pagespeed/ngx_pagespeed/pull/547
+# sudo mkdir -p /var/ngx_pagespeed_cache
+# sudo mkdir -p /var/log/pagespeed
 
 sudo mkdir -p /var/www
 sudo mkdir -p /etc/nginx/sites-available

@@ -24,7 +24,6 @@ server {
             fastcgi_index index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
-            
     }
 
     pagespeed on;
@@ -39,18 +38,26 @@ server {
     }
     location ~ "^/ngx_pagespeed_static/" { }
     location ~ "^/ngx_pagespeed_beacon$" { }
-    location /ngx_pagespeed_statistics { allow 127.0.0.1; deny all; }
-    location /ngx_pagespeed_global_statistics { allow 127.0.0.1; deny all; }
-    location /ngx_pagespeed_message { allow 127.0.0.1; deny all; }
+    location /ngx_pagespeed_statistics { 
+        #allow 127.0.0.1; deny all; 
+        allow all;
+    }
+    location /ngx_pagespeed_global_statistics { 
+        #allow 127.0.0.1; deny all; 
+        allow all;
+    }
+    location /ngx_pagespeed_message { 
+        #allow 127.0.0.1; deny all; 
+        allow all;
+    }
 
     # enable statistics
     pagespeed Statistics on;
     pagespeed StatisticsLogging on;
     pagespeed LogDir /var/log/pagespeed;
 
-    location /pagespeed_console {
-        #allow 127.0.0.1;
-        #deny all;
+    location /pagespeed_console { 
+        #allow 127.0.0.1; deny all; 
         allow all;
     }
 }
