@@ -24,6 +24,8 @@ server {
             fastcgi_index index.php;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
+            fastcgi_cache MYAPP;
+            fastcgi_cache_valid 200 60m;
     }
 
     pagespeed on;
@@ -51,6 +53,14 @@ server {
         allow all;
     }
 
+    # Authorizing Domains
+    pagespeed Domain http://fonts.googleapis.com/;
+
+    # Configuring Downstream Caches
+    # pagespeed DownstreamCachePurgeLocationPrefix http://localhost:80/;
+    # pagespeed DownstreamCachePurgeMethod PURGE;
+    # pagespeed DownstreamCacheRewrittenPercentageThreshold 95;
+    
     # enable statistics
     pagespeed Statistics on;
     pagespeed StatisticsLogging on;

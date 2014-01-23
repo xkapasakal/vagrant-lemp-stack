@@ -1,12 +1,13 @@
 # !/bin/bash
 
 sudo apt-get update
+sudo apt-get install python-software-properties -y
 
 bash /vagrant/scripts/mysql.sh
 sh /vagrant/scripts/expect.sh
 expect /vagrant/scripts/mysql_secure.exp
 bash /vagrant/scripts/php.sh
-bash /vagrant/scripts/nginx.sh
+bash /vagrant/scripts/nginx_pagespeed.sh
 bash /vagrant/scripts/wordpress.sh
 
 
