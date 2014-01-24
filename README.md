@@ -10,3 +10,5 @@ with bundle and use the gem to install cookbooks in specific location
 `rm -rf vendor/cookbooks`
 `mkdir -p vendor/cookbooks`
 `bundle exec berks vendor vendor/cookbooks`
+
+`curl --compressed "http://localhost"`
