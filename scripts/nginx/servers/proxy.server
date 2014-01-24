@@ -84,7 +84,7 @@ server {
   	# Add the inferred Cache-Control header.
   	add_header Cache-Control $new_cache_control_header_val;
 
-	# Block 6: Location block with proxy_cache directives.
+	  # Block 6: Location block with proxy_cache directives.
     # 1: Upstream PageSpeed server is running at localhost:8050.
     proxy_pass http://localhost:8050;
 
@@ -107,7 +107,11 @@ server {
 
     # 7: Add a header for identifying cache hits/misses/expires. This is
     # for debugging purposes only and can be commented out in production.
-      add_header X-Cache $upstream_cache_status;
+    add_header X-Cache $upstream_cache_status;
+
+    # testing cache topology
+    # proxy_ignore_headers Cache-Control Expires; 
+    # proxy_cache_valid 30m; # 200, 301 and 302 will be cached.
   }
 
   # Disable PageSpeed on this server.
