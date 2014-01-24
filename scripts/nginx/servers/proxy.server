@@ -87,7 +87,7 @@ server {
 	  # Block 6: Location block with proxy_cache directives.
     # 1: Upstream PageSpeed server is running at localhost:8050.
     proxy_pass http://localhost:8050;
-    proxy_redirect     off;
+    # proxy_redirect     off;
 
     # 2: Use htmlcache as the zone for caching.
     proxy_cache htmlcache;
