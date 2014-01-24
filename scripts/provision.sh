@@ -1,7 +1,7 @@
 # !/bin/bash
 
 sudo apt-get update
-sudo apt-get install python-software-properties -y
+sudo apt-get install python-software-properties curl -y
 
 bash /vagrant/scripts/mysql.sh
 sh /vagrant/scripts/expect.sh
