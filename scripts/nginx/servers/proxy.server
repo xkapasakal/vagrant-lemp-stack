@@ -1,6 +1,4 @@
 server {
-	
-  max_size=50m;
 
   # Block 1:  Basic port, server_name definitions.
   # This server represents the external caching layer server which
@@ -8,7 +6,7 @@ server {
   # server when the response is not available in the cache.
   # It also services purge requests from the upstream server.
   listen 80;
-  server_name proxy_cache.example.com;
+  server_name localhost;
 
   # Block 2: Define prefix for proxy_cache_key based on the UserAgent.
 

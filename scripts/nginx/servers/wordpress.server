@@ -56,12 +56,7 @@ server {
 
     # Authorizing Domains
     pagespeed Domain http://fonts.googleapis.com/;
-
-    # Configuring Downstream Caches
-    # pagespeed DownstreamCachePurgeLocationPrefix http://localhost:80/;
-    # pagespeed DownstreamCachePurgeMethod PURGE;
-    # pagespeed DownstreamCacheRewrittenPercentageThreshold 95;
-    
+   
     # enable statistics
     pagespeed Statistics on;
     pagespeed StatisticsLogging on;
