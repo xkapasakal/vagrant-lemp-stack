@@ -87,7 +87,7 @@ server {
 	  # Block 6: Location block with proxy_cache directives.
     # 1: Upstream PageSpeed server is running at localhost:8050.
     proxy_pass http://localhost:8050;
-    # proxy_redirect     off;
+    proxy_redirect http://localhost:8050/ http://localhost/;
 
     # 2: Use htmlcache as the zone for caching.
     proxy_cache htmlcache;
@@ -111,8 +111,8 @@ server {
     add_header X-Cache $upstream_cache_status;
 
     # testing cache topology
-    proxy_ignore_headers Cache-Control Expires; 
-    proxy_cache_valid 30m; # 200, 301 and 302 will be cached.
+    # proxy_ignore_headers Cache-Control Expires; 
+    # proxy_cache_valid 30m; # 200, 301 and 302 will be cached.
 
     proxy_set_header   Host             $host;
     proxy_set_header   X-Real-IP        $remote_addr;
