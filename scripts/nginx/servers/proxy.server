@@ -68,13 +68,33 @@ server {
     set $bypass_cache "1";
   }
 
+  # wordpress exceptions
+  # POST requests and urls with a query string should always go to PHP
+  if ($request_method = POST) {
+    set $bypass_cache "1";
+  }   
+  if ($query_string != "") {
+    set $bypass_cache "1";
+  }   
+
+  # Don't cache uris containing the following segments
+  if ($request_uri ~* "/wp-admin/|/xmlrpc.php|wp-.*.php|/feed/|index.php|sitemap(_index)?.xml") {
+    set $bypass_cache "1";
+  }   
+
+  # Don't use the cache for logged in users or recent commenters
+  if ($http_cookie ~* "comment_author|wordpress_[a-f0-9]+|wp-postpass|wordpress_no_cache|wordpress_logged_in") {
+    set $bypass_cache "1";
+  }
+
   # Block 4: Location block for purge requests.
   location ~ /purge(/.*) {
-    #allow localhost;
+    # allow localhost;
     allow 127.0.0.1;
-    #allow YOUR-SERVER-IP;
+    # allow YOUR-SERVER-IP;
     deny all;
     proxy_cache_purge htmlcache $ps_capability_list$1$is_args$args;
+    # proxy_cache_purge WORDPRESS "$scheme$request_method$host$1";
   }
 
   location / {
@@ -111,8 +131,8 @@ server {
     add_header X-Cache $upstream_cache_status;
 
     # testing cache topology
-    # proxy_ignore_headers Cache-Control Expires; 
-    # proxy_cache_valid 30m; # 200, 301 and 302 will be cached.
+    proxy_ignore_headers Cache-Control Expires; 
+    proxy_cache_valid 30m; # 200, 301 and 302 will be cached.
 
     proxy_set_header   Host             $host;
     proxy_set_header   X-Real-IP        $remote_addr;
