@@ -66,8 +66,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     override.vm.box_url = "https://github.com/smdahlen/vagrant-digitalocean/raw/master/box/digital_ocean.box"
 
     provider.image = 'Ubuntu 12.04.3 x64'
-    provider.client_id = ''
-    provider.api_key = ''
+    provider.client_id = ENV['DIGITAL_OCEAN_CLIENT_ID']
+    provider.api_key = ENV['DIGITAL_OCEAN_API_KEY']
   end
 
   # Enable provisioning with Puppet stand alone.  Puppet manifests
