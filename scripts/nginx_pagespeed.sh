@@ -1,6 +1,6 @@
 # !/bin/bash
 
-sudo apt-get install unzip git build-essential zlib1g-dev libpcre3 libpcre3-dev -y
+sudo apt-get install unzip build-essential zlib1g-dev libpcre3 libpcre3-dev -y
 
 sudo adduser --system --no-create-home --disabled-login --disabled-password --group nginx
 
@@ -41,8 +41,8 @@ sudo mkdir -p /var/log/pagespeed
 sudo chown -R nginx:nginx /var/log/pagespeed
 
 # proxy cache
-sudo mkdir -p /var/nginx/nginx-proxy-cache
-sudo chown -R nginx:nginx /var/nginx/nginx-proxy-cache
+sudo mkdir -p /var/run/nginx-cache/
+sudo chown -R nginx:nginx /var/run/nginx-cache/
 
 sudo mkdir -p /var/www
 sudo mkdir -p /etc/nginx/sites-available
