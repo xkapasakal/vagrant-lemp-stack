@@ -1,7 +1,7 @@
 # !/bin/bash
 
 sudo apt-get update
-sudo apt-get install python-software-properties curl -y
+sudo apt-get install git python-software-properties curl -y
 
 bash /vagrant/scripts/mysql.sh
 sh /vagrant/scripts/expect.sh
@@ -10,6 +10,9 @@ bash /vagrant/scripts/php.sh
 bash /vagrant/scripts/nginx_pagespeed.sh
 bash /vagrant/scripts/wordpress.sh
 
+cd ~
+sudo service nginx restart
+sudo service php5-fpm restart
 
 # # To start mysqld at boot time you have to copy
 # # support-files/mysql.server to the right place for your system
