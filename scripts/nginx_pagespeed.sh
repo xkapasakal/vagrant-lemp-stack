@@ -5,10 +5,10 @@ sudo apt-get install unzip build-essential zlib1g-dev libpcre3 libpcre3-dev -y
 sudo adduser --system --no-create-home --disabled-login --disabled-password --group nginx
 
 cd ~
-wget https://github.com/pagespeed/ngx_pagespeed/archive/release-1.7.30.3-beta.zip
+wget -O release-1.7.30.3-beta.zip https://github.com/pagespeed/ngx_pagespeed/archive/release-1.7.30.3-beta.zip
 unzip release-1.7.30.3-beta.zip
 cd ngx_pagespeed-release-1.7.30.3-beta/
-wget https://dl.google.com/dl/page-speed/psol/1.7.30.3.tar.gz
+wget -O 1.7.30.3.tar.gz https://dl.google.com/dl/page-speed/psol/1.7.30.3.tar.gz
 tar -xzvf 1.7.30.3.tar.gz # expands to psol/
 
 cd ~

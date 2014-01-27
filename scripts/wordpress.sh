@@ -1,5 +1,5 @@
 cd ~
-wget http://wordpress.org/latest.tar.gz
+wget -O latest.tar.gz http://wordpress.org/latest.tar.gz
 tar -xzvf latest.tar.gz
 
 mysql -u root -ppassword < /vagrant/scripts/wordpress/config_mysql.sql

@@ -131,8 +131,8 @@ server {
     add_header X-Cache $upstream_cache_status;
 
     # testing cache topology
-    proxy_ignore_headers Cache-Control Expires; 
-    proxy_cache_valid 30m; # 200, 301 and 302 will be cached.
+    # proxy_ignore_headers Cache-Control Expires; 
+    # proxy_cache_valid 30m; # 200, 301 and 302 will be cached.
 
     proxy_set_header   Host             $host;
     proxy_set_header   X-Real-IP        $remote_addr;
