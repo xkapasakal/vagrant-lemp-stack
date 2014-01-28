@@ -98,13 +98,13 @@ server {
   }
 
   location / {
-  	# Block 5b: Override Cache-Control headers as needed.
-  	# Hide the upstream cache control header.
-  	proxy_hide_header Cache-Control;
-  	# Add the inferred Cache-Control header.
-  	add_header Cache-Control $new_cache_control_header_val;
+    # Block 5b: Override Cache-Control headers as needed.
+    # Hide the upstream cache control header.
+    proxy_hide_header Cache-Control;
+    # Add the inferred Cache-Control header.
+    add_header Cache-Control $new_cache_control_header_val;
 
-	  # Block 6: Location block with proxy_cache directives.
+    # Block 6: Location block with proxy_cache directives.
     # 1: Upstream PageSpeed server is running at localhost:8050.
     proxy_pass http://localhost:8050;
     proxy_redirect http://localhost:8050/ http://ip-address/;
