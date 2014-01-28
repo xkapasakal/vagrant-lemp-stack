@@ -52,6 +52,7 @@ sudo cp /vagrant/scripts/nginx/servers/proxy.server /etc/nginx/sites-available/
 ip=$(ip addr | grep inet | grep global | awk -F" " '{print $2}'| sed -e 's/\/.*$//')
 sudo sed -i "s/server_name localhost;/server_name $ip;/g" /etc/nginx/sites-available/proxy.server
 sudo sed -i "s/proxy_redirect http:\/\/localhost:8050\/ http:\/\/localhost\/;/proxy_redirect http:\/\/localhost:8050\/ http:\/\/$ip\/;/g" /etc/nginx/sites-available/proxy.server
+sudo sed -i "s/ip-address/$ip;/g" /etc/nginx/sites-available/proxy.server
 
 sudo ln -s /etc/nginx/sites-available/proxy.server /etc/nginx/sites-enabled/proxy.server
 
