@@ -91,7 +91,7 @@ server {
   location ~ /purge(/.*) {
     # allow localhost;
     allow 127.0.0.1;
-    # allow YOUR-SERVER-IP;
+    allow ip-address;
     deny all;
     proxy_cache_purge htmlcache $ps_capability_list$1$is_args$args;
     # proxy_cache_purge WORDPRESS "$scheme$request_method$host$1";
@@ -107,7 +107,8 @@ server {
 	  # Block 6: Location block with proxy_cache directives.
     # 1: Upstream PageSpeed server is running at localhost:8050.
     proxy_pass http://localhost:8050;
-    proxy_redirect http://localhost:8050/ http://localhost/;
+    proxy_redirect http://localhost:8050/ http://ip-address/;
+    proxy_redirect http://ip-address:8050/ http://ip-address/;
 
     # 2: Use htmlcache as the zone for caching.
     proxy_cache htmlcache;
