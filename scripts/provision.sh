@@ -2,6 +2,7 @@
 
 sudo apt-get update
 sudo apt-get install git python-software-properties curl -y
+# sysstat
 
 bash /vagrant/scripts/mysql.sh
 sh /vagrant/scripts/expect.sh
