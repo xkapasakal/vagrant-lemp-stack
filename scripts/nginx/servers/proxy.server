@@ -140,6 +140,18 @@ server {
     proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
   }
 
+  location /nginx_status {
+    # activate stub_status module
+    stub_status on;
+ 
+    # do not log graphdat polling the endpoint
+    access_log off;
+ 
+    # restrict access to local only
+    allow all;
+    # deny all;
+  }
+
   # Disable PageSpeed on this server.
   pagespeed off;
 
