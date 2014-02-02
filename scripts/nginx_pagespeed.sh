@@ -19,7 +19,7 @@ cd ~
 wget http://nginx.org/download/nginx-1.4.4.tar.gz
 tar -xvzf nginx-1.4.4.tar.gz
 cd nginx-1.4.4/
-./configure --user=nginx --group=nginx --add-module=$HOME/ngx_pagespeed-release-1.7.30.3-beta --add-module=$HOME/ngx_cache_purge
+./configure --user=nginx --group=nginx --add-module=$HOME/ngx_pagespeed-release-1.7.30.3-beta --add-module=$HOME/ngx_cache_purge --with-http_stub_status_module
 make
 sudo make install
 
