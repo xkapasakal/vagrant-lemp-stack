@@ -4,11 +4,24 @@ sudo apt-get update
 sudo apt-get install git python-software-properties curl -y
 # sysstat
 
+# mysql
 bash /vagrant/scripts/mysql.sh
 sh /vagrant/scripts/expect.sh
 expect /vagrant/scripts/mysql_secure.exp
+
+# php
 bash /vagrant/scripts/php.sh
+
+# hhvm
+# bash /vagrant/scripts/hhvm/hhvm.sh
+
+# nginx
 bash /vagrant/scripts/nginx_pagespeed.sh
+
+# hhvm config nginx
+# sudo sed -i "s/fastcgi_pass unix:\/var\/run\/php5-fpm.sock/fastcgi_pass   127.0.0.1:9000/g" /etc/nginx/sites-available/wordpress.server
+
+# wordpress
 bash /vagrant/scripts/wordpress.sh
 
 cd ~
