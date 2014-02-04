@@ -26,7 +26,7 @@ sudo make install
 echo 'export PATH="/usr/local/nginx/sbin:$PATH"' >> ~/.bashrc
 . ~/.bashrc
 
-sudo cp /vagrant/scripts/conf/nginx.conf /usr/local/nginx/conf/
+sudo cp /vagrant/scripts/nginx/conf/nginx.conf /usr/local/nginx/conf/
 
 # sudo touch /usr/local/nginx/html/info.php
 # echo '<?php phpinfo();?>' | sudo tee -a /usr/local/nginx/html/info.php
